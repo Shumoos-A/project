@@ -1,0 +1,5 @@
+/* Tailwind v4 single import */
+@import "tailwindcss";
+
+/* app tweaks */
+:root { color-scheme: light; }
