@@ -1,7 +1,10 @@
+
+
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import Reviews from "../components/Reviews"; // استيراد مكون التعليقات
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -11,16 +14,15 @@ export default function ProductDetail() {
 
   // حالة لتتبع الصورة الرئيسية المعروضة
   const [mainImage, setMainImage] = useState('');
-  // حالة لتتبع الخيار الذي اختاره المستخدم
+  // حالة لتتبع الخيار المحدد (مثل المقاس)
   const [selectedOption, setSelectedOption] = useState(null);
-  // حالة لعرض إشعار عند الإضافة للسلة
+  // حالة لعرض إشعار الإضافة للسلة
   const [notification, setNotification] = useState('');
 
-  // هذا التأثير يضمن تحديث الصورة الرئيسية عند تحميل المنتج أو تغيره
+  // هذا التأثير يضمن تحديث الصورة الرئيسية عند تحميل المنتج
   useEffect(() => {
-    if (product) {
+    if (product && product.images && product.images.length > 0) {
       setMainImage(product.images[0]);
-      setSelectedOption(null); // إعادة تعيين الخيار عند تغيير المنتج
     }
   }, [product]);
 
@@ -44,9 +46,9 @@ export default function ProductDetail() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      {/* قسم الإشعار الذي يظهر ويختفي */}
+      {/* إشعار الإضافة إلى السلة */}
       {notification && (
-        <div className="fixed top-24 right-5 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 animate-fade-in-out">
+        <div className="fixed top-24 right-5 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50">
           {notification}
         </div>
       )}
@@ -61,9 +63,8 @@ export default function ProductDetail() {
               className="w-full h-full object-cover transition-opacity duration-300" 
             />
           </div>
-          {/* الصور المصغرة القابلة للضغط */}
           <div className="grid grid-cols-5 gap-2">
-            {product.images.map((img, index) => (
+            {product.images && product.images.map((img, index) => (
               <div 
                 key={index} 
                 className={`aspect-square rounded-lg overflow-hidden cursor-pointer border-2 transition ${mainImage === img ? 'border-gray-900' : 'border-transparent'}`}
@@ -75,7 +76,7 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* قسم التفاصيل والخيارات */}
+        {/* قسم تفاصيل المنتج والخيارات */}
         <div className="space-y-5">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">{product.name}</h1>
           <p className="text-3xl font-semibold text-emerald-600">${product.price}</p>
@@ -85,7 +86,6 @@ export default function ProductDetail() {
             <p className="text-gray-600 leading-relaxed">{product.description}</p>
           </div>
           
-          {/* عرض الخيارات (القياسات) إذا كانت موجودة */}
           {product.options && (
             <div className="pt-4">
               <h3 className="text-md font-semibold text-gray-800 mb-3">{product.options.title}:</h3>
@@ -96,7 +96,6 @@ export default function ProductDetail() {
                     onClick={() => setSelectedOption(value)}
                     className={`px-6 py-2 border-2 rounded-lg font-medium transition-all duration-200 ${selectedOption === value 
                       ? 'bg-gray-900 text-white border-gray-900 scale-105' 
-                      // تصميم الزر عندما لا يكون محددًا
                       : 'bg-white hover:bg-gray-100 border-gray-300'}`}
                   >
                     {value}
@@ -106,10 +105,8 @@ export default function ProductDetail() {
             </div>
           )}
 
-          {/* زر الإضافة إلى السلة */}
           <button 
             onClick={handleAddToCart}
-            // تعطيل الزر إذا كان المنتج له خيارات ولم يتم تحديد أي خيار
             disabled={product.options && !selectedOption}
             className="w-full h-14 mt-6 text-lg rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 active:scale-95 transition disabled:bg-gray-400 disabled:cursor-not-allowed shadow-lg"
           >
@@ -117,6 +114,12 @@ export default function ProductDetail() {
           </button>
         </div>
       </div>
+      
+      {/* فاصل مرئي */}
+      <hr className="my-12 border-t-2 border-gray-200" />
+      
+      {/* قسم التعليقات والتقييمات */}
+      {product && <Reviews productId={product.id} />}
     </div>
   );
 }
