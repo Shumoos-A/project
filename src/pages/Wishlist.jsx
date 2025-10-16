@@ -1,49 +1,41 @@
-import { Link } from "react-router-dom";
-import { useWishlist } from "../context/WishlistContext";
-import { useCart } from "../context/CartContext";
+import { useWishlist } from '../context/WishlistContext';
+import { Link } from 'react-router-dom';
+import ProductCard from '../components/ProductCard'; // استيراد كرت المنتج
 
 export default function Wishlist() {
-  const { wishlist, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  // جلب قائمة المفضلة من الـ context
+  const { wishlistItems, toggleWishlistItem } = useWishlist();
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">My Wishlist</h2>
+    <div className="bg-white">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-bold text-gray-900">My Wishlist</h1>
+          <p className="mt-2 text-gray-500">
+            You have {wishlistItems.length} item(s) in your wishlist.
+          </p>
+        </div>
 
-      {wishlist.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-black/10 bg-white p-10 text-center">
-          <p className="text-gray-600">Your wishlist is empty.</p>
-          <Link to="/" className="inline-block mt-4 px-4 py-2 rounded-lg bg-gray-900 text-white">
-            Discover Products
-          </Link>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {wishlist.map((item) => (
-            <div key={item.id} className="rounded-xl border border-black/10 bg-white p-4 flex flex-col justify-between">
-              <div>
-                <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded-md mb-3" />
-                <h3 className="font-semibold">{item.name}</h3>
-                <p className="text-lg font-bold text-emerald-600">${item.price}</p>
-              </div>
-              <div className="flex flex-col gap-2 mt-4">
-                <button 
-                  onClick={() => addToCart(item)}
-                  className="w-full px-3 py-1.5 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition"
-                >
-                  Add to Cart
-                </button>
-                <button 
-                  onClick={() => removeFromWishlist(item.id)} 
-                  className="w-full px-3 py-1.5 rounded-lg border border-black/10 hover:bg-gray-50 transition"
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+        {wishlistItems.length > 0 ? (
+          // إذا كانت القائمة تحتوي على منتجات، قم بعرضها
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {wishlistItems.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          // إذا كانت القائمة فارغة
+          <div className="text-center py-20 border-2 border-dashed border-gray-300 rounded-lg">
+            <p className="text-lg text-gray-500">Your wishlist is currently empty.</p>
+            <Link 
+              to="/" 
+              className="mt-6 inline-block bg-black text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition"
+            >
+              Continue Shopping
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

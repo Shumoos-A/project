@@ -1,70 +1,59 @@
-
-
+// src/data/filters.js
 export const filterConfig = {
-  // فلاتر قسم الأزياء
   fashion: [
+    {
+      label: "Category",
+      key: "subcategory",
+      // تمت إضافة "Complete Sets" (تنسيقات جاهزة)
+      options: ["Dresses", "Jackets", "Bags", "Shoes", "Complete Sets", "T-Shirts", "Pants"]
+    },
+    {
+      label: "Style", // فلتر جديد للطراز (كلاسيك، كاجوال)
+      key: "tags",
+      options: ["Classic Styles", "Casual Wear", "Evening Wear"]
+    },
+    {
+      label: "Collection", // فلتر جديد للمواسم
+      key: "tags",
+      options: ["Summer Collection", "Winter Essentials"]
+    },
     {
       label: "Gender",
       key: "gender",
-      options: ["Womenswear", "Menswear"]
+      options: ["Womenswear", "Menswear", "Unisex"]
     },
     {
-      label: "Subcategory",
-      key: "subcategory",
-      options: ["Dresses", "Jeans", "Sweaters", "Jackets", "Pants"]
-    },
-    {
-      label: "Collection", // هذا الفلتر الآن موجود فقط هنا
+      label: "Color", // تمت إضافة ألوان أكثر
       key: "tags",
-      options: ["Summer Collection", "Winter Essentials", "Classic Styles"]
-    },
-    {
-      label: "Season",
-      key: "season",
-      options: ["Summer", "Winter", "All-Season"]
-    },
-    {
-      label: "Color",
-      key: "tags",
-      options: ["Red", "Blue", "Beige", "Black", "Khaki"]
+      options: ["Black", "Red", "Blue", "White", "Beige", "Green", "Pink", "Gray"]
     }
   ],
-  
-  // فلاتر قسم المجوهرات
-  jewelry: [
-    {
-      label: "Material",
-      key: "material",
-      options: ["Gold", "Silver", "Diamond"]
-    }
+  makeup: [
+    { label: "Product Type", key: "subcategory", options: ["Lipstick", "Foundation", "Eyeshadow"] },
+    { label: "Brand", key: "brand", options: ["Evola Beauty", "Chanel", "Dior"] },
+    { label: "Finish", key: "tags", options: ["Matte", "Glossy"] }
   ],
-  
-  // == فلاتر قسم الأثاث (مكتمل) ==
+  fragrances: [
+    { label: "For", key: "gender", options: ["Women", "Men", "Unisex"] },
+    { label: "Fragrance Family", key: "tags", options: ["Floral", "Woody", "Citrus"] },
+    { label: "Concentration", key: "subcategory", options: ["Eau de Parfum", "Eau de Toilette"] }
+  ],
   furniture: [
-    {
-      label: "Type", // حسب نوع الأثاث
-      key: "subcategory",
-      options: ["Sofas", "Chairs", "Tables"]
-    },
-    {
-      label: "Color", // حسب اللون
-      key: "tags",
-      options: ["Gray", "Brown", "Black", "White"]
-    }
+    { label: "Type", key: "subcategory", options: ["Sofas", "Chairs", "Tables"] },
+    { label: "Color", key: "tags", options: ["Gray", "Brown", "Black"] }
   ],
-  
-  // == فلاتر قسم الزهور (مكتمل) ==
-  flowers: [
-    {
-      label: "Flower Type", // حسب نوع الزهور
-      key: "subcategory",
-      options: ["Roses", "Tulips", "Lilies"]
+
+  // ✅ تم إرجاع فلاتر قسم المجوهرات هنا
+  jewelry: [
+    { 
+      label: "Material", 
+      key: "material", 
+      options: ["Gold", "Silver", "Diamond"] 
     },
     {
-      label: "Color", // حسب اللون
-      key: "tags",
-      options: ["Red", "Yellow", "White", "Pink"]
+      label: "Type",
+      key: "subcategory",
+      options: ["Necklaces", "Rings", "Bracelets"]
     }
   ],
 };
-
