@@ -55,7 +55,7 @@ export default function ContactUs() {
     <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl tracking-tight">
+          <h1 className="text-4xl font-extrabold text-black sm:text-5xl tracking-tight">
             Get In Touch
           </h1>
           <p className="mt-4 text-xl text-gray-600">
@@ -92,7 +92,7 @@ export default function ContactUs() {
             <button 
               type="submit" 
               disabled={formStatus.submitting}
-              className="w-full py-3 px-4 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="w-full py-3 px-4 bg-black text-white font-semibold rounded-lg hover:bg-gray-900 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {formStatus.submitting ? 'Sending...' : 'Send Message'}
             </button>

@@ -1,58 +1,96 @@
-import { Link } from 'react-router-dom'; // 1. استيراد Link
-import { useCart } from "../context/CartContext";
-import { useWishlist } from "../context/WishlistContext";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
+import { Heart } from 'lucide-react'; // استيراد أيقونة القلب
 
-function Stars({ value = 4.5 }) { /* ... كود النجوم يبقى كما هو ... */ }
-
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, showNotification }) {
   const { addToCart } = useCart();
-  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { toggleWishlistItem, isItemInWishlist } = useWishlist();
 
-  const isProductInWishlist = isInWishlist(product.id);
+  // التحقق من صلاحية المنتج لتجنب أي خطأ
+  if (!product || !product.id) {
+    return null; // لا تعرض أي شيء إذا كان المنتج غير صالح
+  }
+  
+  const isFavorite = isItemInWishlist(product.id);
+  const filledStars = Math.round(product.rating || 0);
 
-  // 2. هذه الدوال تمنع الانتقال للصفحة عند الضغط على الأزرار الداخلية
-  const handleWishlistToggle = (e) => {
-    e.preventDefault(); 
-    e.stopPropagation();
-    if (isProductInWishlist) removeFromWishlist(product.id);
-    else addToWishlist(product);
-  };
-
+  // دالة الإضافة للسلة (مع نظام التنبيهات)
   const handleAddToCart = (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    // إذا كان المنتج له خيارات، لا تضيفه للسلة مباشرة من هنا
-    if (product.options) {
-      alert("Please select options on the product page.");
+    if (product.category === 'Fashion' || product.subcategory === 'Shoes') {
+      if (showNotification) {
+        showNotification('Please select a size on the product page.');
+      }
     } else {
       addToCart(product);
+      if (showNotification) {
+        showNotification(`${product.name} added to cart!`);
+      }
     }
-  }
+  };
+  
+  // دالة إضافة/إزالة من المفضلة
+  const handleToggleWishlist = (e) => {
+    e.preventDefault();
+    toggleWishlistItem(product);
+  };
+  
+  // دالة آمنة لعرض السعر
+  const formatPrice = (price) => {
+    const numericPrice = Number(price);
+    if (!isNaN(numericPrice)) {
+      return `${numericPrice.toFixed(2)} IQD`;
+    }
+    return "N/A"; // قيمة احتياطية في حال كان السعر غير صالح
+  };
 
   return (
-    // 3. تغليف البطاقة بـ <Link>
-    <Link to={`/product/${product.slug}`} className="block group">
-      <div className="rounded-2xl overflow-hidden border bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+    <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden group transition-shadow hover:shadow-lg flex flex-col">
+      <Link to={`/product/${product.slug}`} className="flex flex-col h-full">
+        
+        {/* ✅ تم إرجاع قسم الصورة وأيقونة القلب هنا */}
         <div className="relative">
-          <button onClick={handleWishlistToggle} className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/80 backdrop-blur-sm text-gray-700 hover:text-red-500 transition">
-            {isProductInWishlist ? <FaHeart className="text-red-500" size={20} /> : <FaRegHeart size={20} />}
-          </button>
-          <div className="aspect-[4/3] overflow-hidden">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <div className="aspect-square w-full overflow-hidden bg-gray-100">
+            <img
+              src={product.images?.[0] || 'https://placehold.co/400x400'}
+              alt={product.name}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
           </div>
+          <button
+            onClick={handleToggleWishlist}
+            className="absolute top-3 right-3 bg-white/80 rounded-full p-2 transition hover:bg-white"
+            aria-label="Toggle Wishlist"
+          >
+            <Heart size={20} className={isFavorite ? 'text-red-500 fill-current' : 'text-gray-500'} />
+          </button>
         </div>
-        <div className="p-4 space-y-2 flex flex-col flex-grow">
-          <h3 className="font-semibold text-gray-800">{product.name}</h3>
-          <p className="text-sm text-gray-500 line-clamp-2 flex-grow">{product.description}</p>
-          <div className="flex items-center justify-between pt-2">
-            <span className="font-bold text-lg text-emerald-600">${product.price}</span>
-            <button onClick={handleAddToCart} className="px-4 py-2 text-sm rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">
+        
+        <div className="p-4 flex flex-col flex-grow">
+          <h3 className="font-semibold text-lg truncate text-black">{product.name}</h3>
+          
+          {product.rating && (
+            <div className="flex items-center my-2">
+                {[...Array(5)].map((_, i) => (
+                    <span key={i} className={i < filledStars ? 'text-yellow-400' : 'text-gray-300'}>★</span>
+                ))}
+            </div>
+          )}
+
+          <p className="text-sm text-gray-500 line-clamp-2 mb-3">{product.description}</p>
+          
+          <div className="mt-auto flex items-center justify-between">
+            <span className="font-bold text-lg text-black">{formatPrice(product.price)}</span>
+            <button 
+              onClick={handleAddToCart}
+              className="px-4 py-1.5 rounded-lg bg-black text-white text-sm font-semibold hover:bg-gray-800 transition"
+            >
               Add to Cart
             </button>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

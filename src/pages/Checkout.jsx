@@ -94,16 +94,16 @@ export default function Checkout() {
               <div className="space-y-3">
                 
                 {/* الدفع عند الاستلام */}
-                <div onClick={() => setPaymentMethod('cash')} className={`p-4 border rounded-lg cursor-pointer flex items-center justify-between ${paymentMethod === 'cash' ? 'border-gray-800 ring-2 ring-gray-800' : ''}`}>
+                <div onClick={() => setPaymentMethod('cash')} className={`p-4 border rounded-lg cursor-pointer flex items-center justify-between ${paymentMethod === 'cash' ? 'border-black ring-2 ring-black' : ''}`}>
                   <div>
                     <h4 className="font-bold">Cash on Delivery</h4>
                     <p className="text-sm text-gray-500">Pay when you receive your order.</p>
                   </div>
-                  {paymentMethod === 'cash' && <div className="w-5 h-5 bg-gray-800 rounded-full"/>}
+                  {paymentMethod === 'cash' && <div className="w-5 h-5 bg-black rounded-full"/>}
                 </div>
 
                 {/* زين كاش (محاكاة) */}
-                <div onClick={() => setPaymentMethod('zaincash')} className={`p-4 border rounded-lg cursor-pointer flex items-center justify-between ${paymentMethod === 'zaincash' ? 'border-gray-800 ring-2 ring-gray-800' : ''}`}>
+                <div onClick={() => setPaymentMethod('zaincash')} className={`p-4 border rounded-lg cursor-pointer flex items-center justify-between ${paymentMethod === 'zaincash' ? 'border-black ring-2 ring-black' : ''}`}>
                    <div>
                     <h4 className="font-bold">Pay with ZainCash</h4>
                     <p className="text-sm text-gray-500">You will be redirected to complete payment.</p>
@@ -112,7 +112,7 @@ export default function Checkout() {
                 </div>
 
                 {/* كي كارد (محاكاة) */}
-                <div onClick={() => setPaymentMethod('qicard')} className={`p-4 border rounded-lg cursor-pointer flex items-center justify-between ${paymentMethod === 'qicard' ? 'border-gray-800 ring-2 ring-gray-800' : ''}`}>
+                <div onClick={() => setPaymentMethod('qicard')} className={`p-4 border rounded-lg cursor-pointer flex items-center justify-between ${paymentMethod === 'qicard' ? 'border-black ring-2 ring-black' : ''}`}>
                    <div>
                     <h4 className="font-bold">Pay with Qi Card</h4>
                     <p className="text-sm text-gray-500">You will be redirected to complete payment.</p>
@@ -122,7 +122,7 @@ export default function Checkout() {
               </div>
             </div>
             
-            <button type="submit" className="w-full h-12 text-lg rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition">
+            <button type="submit" className="w-full h-12 text-lg rounded-xl bg-black text-white font-semibold hover:bg-gray-800 transition">
               Place Order (${finalTotal.toFixed(2)})
             </button>
           </form>

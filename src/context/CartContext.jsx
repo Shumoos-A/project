@@ -18,25 +18,38 @@ export function CartProvider({ children }) {
 
   const addToCart = (product) => {
     setCart((prev) => {
-      const existing = prev.find((i) => i.id === product.id);
-      if (existing) {
-        return prev.map((i) => (i.id === product.id ? { ...i, qty: i.qty + 1 } : i));
+      const existingProduct = prev.find((item) => item.id === product.id);
+      if (existingProduct) {
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+        );
       }
       return [...prev, { ...product, qty: 1 }];
     });
   };
 
-  const removeFromCart = (id) => setCart((prev) => prev.filter((i) => i.id !== id));
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
 
-  const updateQty = (id, qty) =>
-    setCart((prev) => prev.map((i) => (i.id === id ? { ...i, qty: Math.max(1, qty) } : i)));
+  const updateQty = (id, qty) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, qty: Math.max(1, Number(qty)) } : item
+      )
+    );
+  };
 
-  const clear = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+  };
 
   const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQty, clear, total }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateQty, clearCart, total }}
+    >
       {children}
     </CartContext.Provider>
   );

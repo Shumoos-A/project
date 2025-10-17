@@ -1,97 +1,101 @@
+import { useState, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
+import { products } from '../data/products';
+import { filterConfig } from '../data/filters';
+import ProductCard from '../components/ProductCard';
 
-import { useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
-import ProductCard from "../components/ProductCard";
-import SidebarFilter from "../components/SidebarFilter"; // استيراد الشريط الجانبي
-import { products as data } from "../data/products";
-import Lottie from "lottie-react";
-import notFoundAnimation from "../assets/notFound.json";
-
-export default function Home({ searchQuery }) {
-  const { category: categoryFromUrl } = useParams();
-  
-  // حالة جديدة لتخزين الفلاتر المحددة من قبل المستخدم
+export default function Home() {
+  const { category = 'all' } = useParams();
   const [selectedFilters, setSelectedFilters] = useState({});
 
-  // هذه الدالة يتم تمريرها إلى الشريط الجانبي ليتم استدعاؤها عند تغيير الفلتر
-  const handleFilterChange = (filterKey, option) => {
-    setSelectedFilters(prevFilters => {
-      const currentOptions = prevFilters[filterKey] || [];
+  const handleFilterChange = (key, option) => {
+    setSelectedFilters(prev => {
+      const currentOptions = prev[key] || [];
       const newOptions = currentOptions.includes(option)
-        ? currentOptions.filter(item => item !== option) // إذا كان الخيار محددًا، قم بإلغاء تحديده
-        : [...currentOptions, option]; // إذا لم يكن محددًا، قم بإضافته
-
-      // إذا كانت قائمة الخيارات فارغة، احذف مفتاح الفلتر نفسه لتنظيف الحالة
-      if (newOptions.length === 0) {
-        const { [filterKey]: _, ...rest } = prevFilters;
-        return rest;
-      }
-
-      return { ...prevFilters, [filterKey]: newOptions };
+        ? currentOptions.filter(o => o !== option)
+        : [...currentOptions, option];
+      return { ...prev, [key]: newOptions };
     });
   };
 
-  // useMemo لإعادة حساب قائمة المنتجات المفلترة فقط عند تغيير الاعتماديات
-  const filtered = useMemo(() => {
-    const currentCategory = categoryFromUrl ? categoryFromUrl.toLowerCase() : "all";
-    
-    return data.filter(p => {
-      // 1. التحقق من تطابق القسم الرئيسي
-      const categoryMatch = currentCategory === "all" || (p.category && p.category.toLowerCase() === currentCategory);
+  const filteredProducts = useMemo(() => {
+    const categoryProducts = category === 'all'
+      ? products
+      : products.filter(p => p.category.toLowerCase() === category.toLowerCase());
 
-      // 2. التحقق من تطابق البحث (يبقى كما هو)
-      const searchMatch = !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const activeFilterKeys = Object.keys(selectedFilters).filter(key => selectedFilters[key].length > 0);
+    if (activeFilterKeys.length === 0) return categoryProducts;
 
-      // 3. التحقق من تطابق الفلاتر المتقدمة (الجزء الأهم)
-      const filterMatch = Object.entries(selectedFilters).every(([key, values]) => {
-        if (!values.length) return true; // تجاهل الفلتر إذا لم يتم تحديد أي خيار له
-        
-        // إذا كان الفلتر للـ "tags" (مثل الألوان)، تحقق مما إذا كان المنتج يحتوي على أي من القيم المحددة
-        if (key === 'tags') {
-          return values.some(val => p.tags?.map(t => t.toLowerCase()).includes(val));
+    return categoryProducts.filter(product => {
+      return activeFilterKeys.every(key => {
+        const selectedOptions = selectedFilters[key];
+        const productValue = product[key];
+
+        // ✅ تم تحديث منطق الفلترة ليعمل مع المفاتيح الجديدة
+        // الفلاتر التي تبحث في حقل "tags"
+        const tagBasedKeys = ['style', 'collection', 'color']; 
+        if (tagBasedKeys.includes(key) && Array.isArray(product.tags)) {
+          return selectedOptions.some(option => product.tags.includes(option));
         }
-
-        // للحقول الأخرى (مثل material أو subcategory)، تحقق من التطابق المباشر
-        return values.includes(p[key]?.toLowerCase());
+        // الفلاتر الأخرى
+        if (typeof productValue === 'string') {
+          return selectedOptions.includes(productValue);
+        }
+        return false;
       });
-
-      // يجب أن تتحقق كل الشروط لعرض المنتج
-      return categoryMatch && searchMatch && filterMatch;
     });
-  }, [searchQuery, categoryFromUrl, selectedFilters]);
+  }, [category, selectedFilters]);
 
-  // سنعرض كل النتائج بدون تقسيم الصفحات حاليًا للتبسيط
-  const pageItems = filtered; 
+  const currentFilters = category !== 'all' ? (filterConfig[category.toLowerCase()] || []) : [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="grid lg:grid-cols-4 gap-8 items-start">
-        {/* الشريط الجانبي للفلترة (يظهر فقط عند وجود قسم في الرابط) */}
-        <div className="lg:col-span-1">
-          {categoryFromUrl && categoryFromUrl !== 'all' && (
-            <SidebarFilter 
-              currentCategory={categoryFromUrl} 
-              onFilterChange={handleFilterChange}
-              selectedFilters={selectedFilters}
-            />
-          )}
-        </div>
+    <>
+      {/* ✅ هذا الكود يضيف CSS مباشرة للصفحة لتلوين علامة الصح */}
+      <style>{`
+        .custom-checkbox {
+          accent-color: black;
+        }
+      `}</style>
 
-        {/* شبكة عرض المنتجات */}
-        <div className={categoryFromUrl && categoryFromUrl !== 'all' ? "lg:col-span-3" : "lg:col-span-4"}>
-          {pageItems.length > 0 ? (
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
-              {pageItems.map((p) => <ProductCard key={p.id} product={p} />)}
-            </div>
-          ) : (
-            <div className="text-center py-10 col-span-full">
-              <Lottie animationData={notFoundAnimation} loop={true} className="mx-auto w-72 h-72" />
-              <h3 className="mt-4 text-xl font-semibold text-gray-700">No Products Found</h3>
-              <p className="text-gray-500">Try adjusting your filters or search term.</p>
-            </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {currentFilters.length > 0 && (
+            <aside className="w-full md:w-1/4 lg:w-1/5">
+              <h2 className="text-2xl font-bold mb-4">Filters</h2>
+              {currentFilters.map(filterGroup => (
+                <div key={filterGroup.label} className="mb-6">
+                  <h3 className="font-semibold text-lg mb-3 border-b pb-2">{filterGroup.label}</h3>
+                  <div className="space-y-2">
+                    {filterGroup.options.map(option => (
+                      <label key={option} className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          // ✅ تم إضافة الكلاس هنا
+                          className="custom-checkbox h-5 w-5 rounded border-gray-300"
+                          checked={selectedFilters[filterGroup.key]?.includes(option) || false}
+                          onChange={() => handleFilterChange(filterGroup.key, option)}
+                        />
+                        <span className="ml-3 text-gray-700">{option}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </aside>
           )}
+
+          <main className={currentFilters.length > 0 ? "w-full md:w-3/4 lg:w-4/5" : "w-full"}>
+            <h1 className="text-3xl font-bold mb-6 capitalize">{category} Products</h1>
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredProducts.map(product => <ProductCard key={product.id} product={product} />)}
+              </div>
+            ) : (
+              <p>No products found.</p>
+            )}
+          </main>
         </div>
       </div>
-    </div>
+    </>
   );
 }

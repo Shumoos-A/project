@@ -1,200 +1,253 @@
 // src/data/products.js
-
 export const products = [
-  // == Fashion Products ==
+  // ===================================
+  // ====== Fashion Products ===========
+  // ===================================
   {
-    id: 1,
-    slug: "summer-floral-dress",
-    name: "Summer Floral Dress",
+    id: 101,
+    slug: "beige-suede-heels",
+    name: "Beige Suede Heels",
     category: "Fashion",
-    gender: "womenswear",
-    subcategory: "Dresses",
-    season: "summer",
+    subcategory: "Shoes",
+    gender: "Womenswear",
     price: 75.00,
-    images: [
-      "https://images.unsplash.com/photo-1572804013427-4d7ca7268217?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80",
-      "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
-    ],
-    description: "A light and breezy floral dress, perfect for summer days.",
+    images: ["https://plus.unsplash.com/premium_photo-1681223965359-846e790d1242?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "Elegant beige suede heels, perfect for formal events.",
     rating: 4.7,
-    tags: ["summer-collection", "red"],
-    options: { title: "Size", values: ["S", "M", "L"] }
+    reviewCount: 55,
+    tags: ["Classic Styles", "Summer Collection", "Beige"]
   },
   {
-    id: 2,
-    slug: "high-waist-denim-jeans",
-    name: "High-Waist Denim Jeans",
+    id: 102,
+    slug: "rose-gold-womens-watch",
+    name: "Rose Gold Women's Watch",
     category: "Fashion",
-    gender: "womenswear",
-    subcategory: "Jeans",
-    season: "all-season",
-    price: 89.99,
-    images: [
-      "https://images.unsplash.com/photo-1604176354204-926873782855?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
-      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-    ],
-    description: "Classic high-waist jeans that offer a flattering fit and timeless style.",
-    rating: 4.8,
-    tags: ["classic-styles", "blue"],
-    options: { title: "Size", values: ["26", "28", "30", "32"] }
-  },
-   {
-    id: 3,
-    slug: "classic-leather-jacket-m",
-    name: "Classic Leather Jacket",
-    category: "Fashion",
-    gender: "menswear",
-    subcategory: "Jackets",
-    season: "all-season",
-    price: 189.99,
-    images: [
-      "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      "https://images.unsplash.com/photo-1603217041444-938b3d100b4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-    ],
-    description: "A timeless leather jacket made from premium quality leather.",
-    rating: 4.8,
-    tags: ["classic-styles", "black"],
-    options: { title: "Size", values: ["M", "L", "XL"] }
-  },
-  {
-    id: 15,
-    slug: "cozy-winter-sweater-w",
-    name: "Cozy Winter Sweater",
-    category: "Fashion",
-    gender: "womenswear",
-    subcategory: "Sweaters",
-    season: "winter",
-    price: 110.00,
-    images: [
-      "https://images.unsplash.com/photo-1608494603683-c2a86a6e5b4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      "https://images.unsplash.com/photo-1611094603957-3a1c6a7b0a2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "Stay warm with this incredibly soft cashmere blend sweater.",
+    subcategory: "WristWatch",
+    gender: "Womenswear",
+    price: 220.00,
+    images: ["https://plus.unsplash.com/premium_photo-1728759440467-d710b7073761?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=722"],
+    description: "A stunning rose gold watch with a minimalist design.",
     rating: 4.9,
-    tags: ["winter-essentials", "beige"],
-    options: { title: "Size", values: ["S", "M", "L", "XL"] }
+    reviewCount: 110,
+    tags: ["Classic Styles", "Golden"]
+  }, 
+  {
+    id: 103,
+    slug: "mens-dark-blue-tshirt",
+    name: "Men's Dark Blue T-Shirt",
+    category: "Fashion",
+    subcategory: "T-Shirts",
+    gender: "Menswear",
+    price: 35.00,
+    images: ["https://images.unsplash.com/photo-1713881649391-a1c8ddaf83cd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "A comfortable and stylish dark blue t-shirt for everyday wear.",
+    rating: 4.5,
+    reviewCount: 80,
+    tags: ["Casual Wear", "Summer Collection" ,"Blue"]
   },
   {
-    id: 4,
-    slug: "slim-fit-chino-pants-m",
-    name: "Slim-Fit Chino Pants",
+    id: 104,
+    slug: "mens-light-gray-tshirt",
+    name: "Men's Light Gray T-Shirt",
     category: "Fashion",
-    gender: "menswear",
-    subcategory: "Pants",
-    season: "summer",
-    price: 65.50,
-    images: [
-      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "Versatile and comfortable slim-fit chinos for any occasion.",
+    subcategory: "T-Shirts",
+    gender: "Menswear",
+    price: 35.00,
+    images: ["https://images.unsplash.com/photo-1693443688057-85f57b872a3c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "A versatile light gray t-shirt made from soft cotton.",
     rating: 4.6,
-    tags: ["summer-collection", "khaki"],
-    options: { title: "Waist", values: ["30", "32", "34", "36"] }
+    reviewCount: 75,
+    tags: ["Casual Wear", "Summer Collection" ,"Gray"]
+  },
+  {
+    id: 116,
+    slug: "womens-black-winter-boot",
+    name: "Women's Black Winter Boot",
+    category: "Fashion",
+    subcategory: "Boot",
+    gender: "Womenswear",
+    price: 150.00,
+    images: ["https://images.unsplash.com/photo-1743029910861-b5dfd46a7dfe?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"],
+    description: "Stylish and warm black boots for the winter season.",
+    rating: 4.8,
+    reviewCount: 95,
+    tags: ["Winter Essentials","Black"]
+  },
+  {
+    id: 117,
+    slug: "womens-beige-slippers",
+    name: "Women's Beige Slippers",
+    category: "Fashion",
+    subcategory: "Slippers",
+    gender: "Womenswear",
+    price: 45.00,
+    images: ["https://images.unsplash.com/photo-1618615098938-84fc29796e76?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688"],
+    description: "Comfortable and chic beige slippers for indoor and outdoor use.",
+    rating: 4.6,
+    reviewCount: 60,
+    tags: ["Summer Collection","Beige"]
+  },
+  {
+    id: 119,
+    slug: "beige-tote-bag",
+    name: "Beige Tote Bag",
+    category: "Fashion",
+    subcategory: "Bags",
+    gender: "Womenswear",
+    price: 90.00,
+    images: ["https://images.unsplash.com/photo-1718365837196-1e2f5fb9ad0b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=686"],
+    description: "A spacious and stylish beige tote bag, perfect for everyday essentials.",
+    rating: 4.7,
+    reviewCount: 70,
+    tags: ["Summer Collection","Beige"]
+  },
+  {
+    id: 121,
+    slug: "white-leather-crossbody-bag",
+    name: "White Leather Crossbody Bag",
+    category: "Fashion",
+    subcategory: "Bags",
+    gender: "Womenswear",
+    price: 110.00,
+    images: ["https://images.unsplash.com/photo-1682745230951-8a5aa9a474a0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "A chic white leather crossbody bag with a minimalist design.",
+    rating: 4.8,
+    reviewCount: 82,
+    tags: ["Classic Styles","Summer Collection","White"]
+  },
+  {
+    id: 124,
+    slug: "elegant-red-summer-dress",
+    name: "Elegant Red Summer Dress",
+    category: "Fashion",
+    subcategory: "Dresses",
+    gender: "Womenswear",
+    price: 130.00,
+    images: ["https://plus.unsplash.com/premium_photo-1675186049409-f9f8f60ebb5e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "A beautiful red dress perfect for summer evenings.",
+    rating: 4.9,
+    reviewCount: 115,
+    tags: ["Classic Styles","Summer Collection","Red"]
+  },
+  {
+    id: 131,
+    slug: "womens-classic-two-piece-set",
+    name: "Women's Classic Two-Piece Set",
+    category: "Fashion",
+    subcategory: "Complete Sets",
+    gender: "Womenswear",
+    price: 180.00,
+    images: ["https://plus.unsplash.com/premium_photo-1695339146389-2b56ee6e6cc3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "An elegant and classic two-piece set for a polished look.",
+    rating: 4.8,
+    reviewCount: 90,
+    tags: ["Classic Styles"]
   },
 
-  // == Jewelry Products ==
+  // ===================================
+  // ====== Fragrances Products ========
+  // ===================================
   {
-    id: 5,
-    slug: "silver-moon-necklace",
-    name: "Silver Moon Necklace",
-    category: "Jewelry",
-    material: "Silver",
-    price: 120.00,
-    images: [
-      "https://images.unsplash.com/photo-1611652033959-8a3d4aa0e525?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      "https://images.unsplash.com/photo-1617038220319-c5a94cf34da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "A delicate and elegant sterling silver necklace.",
+    id: 300,
+    slug: "captivating-floral-perfume",
+    name: "Captivating Floral Perfume",
+    category: "Fragrances",
+    subcategory: "Eau de Parfum",
+    gender: "Women",
+    price: 95.00,
+    images: ["https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80"],
+    description: "A captivating floral fragrance with notes of jasmine and rose.",
     rating: 4.9,
-  },
-  
-  // == Furniture Products (UPDATED & EXPANDED) ==
-  {
-    id: 7,
-    slug: "mid-century-sofa",
-    name: "Mid-Century Modern Sofa",
-    category: "Furniture",
-    subcategory: "Sofas",
-    price: 899.00,
-    images: [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    ],
-    description: "A stylish sofa that brings a touch of mid-century modern design.",
-    rating: 4.7,
-    tags: ["gray", "fabric"]
+    reviewCount: 210,
+    tags: ["Floral"]
   },
   {
-    id: 9,
-    slug: "wooden-dining-chair",
-    name: "Wooden Dining Chair",
-    category: "Furniture",
-    subcategory: "Chairs",
-    price: 125.00,
-    images: [
-      "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "A beautifully crafted wooden chair, perfect for your dining area.",
+    id: 400,
+    slug: "elegant-woody-fragrance",
+    name: "Elegant Woody Fragrance",
+    category: "Fragrances",
+    subcategory: "Eau de Parfum",
+    gender: "Women",
+    price: 110.00,
+    images: ["https://images.unsplash.com/photo-1547887537-6158d64c35b3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "An elegant and warm woody fragrance for a sophisticated touch.",
     rating: 4.8,
-    tags: ["brown", "wood"]
+    reviewCount: 180,
+    tags: ["Woody"]
   },
   {
-    id: 11,
-    slug: "modern-black-desk",
-    name: "Modern Black Desk",
+    id: 404,
+    slug: "fresh-citrus-scent-men",
+    name: "Fresh Citrus Scent for Men",
+    category: "Fragrances",
+    subcategory: "Eau de Toilette",
+    gender: "Men",
+    price: 80.00,
+    images: ["https://images.unsplash.com/photo-1700522360590-a913ff2a3d9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764"],
+    description: "A refreshing and energetic citrus scent designed for the modern man.",
+    rating: 4.7,
+    reviewCount: 130,
+    tags: ["Citrus"]
+  },
+
+  // ===================================
+  // ====== Furniture Products =========
+  // ===================================
+  {
+    id: 700,
+    slug: "beige-minimalist-table",
+    name: "Beige Minimalist Table",
     category: "Furniture",
     subcategory: "Tables",
-    price: 320.00,
-    images: [
-      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80",
-      "https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=787&q=80"
-    ],
-    description: "A sleek and minimalist black desk, perfect for a modern home office.",
+    price: 250.00,
+    images: ["https://plus.unsplash.com/premium_photo-1681412205156-bb506a4ea970?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"],
+    description: "A minimalist table in a soft beige tone, perfect for any modern space.",
     rating: 4.8,
-    tags: ["black", "wood"]
+    reviewCount: 95,
+    tags: ["Beige"]
   },
   {
-    id: 12,
-    slug: "white-lounge-chair",
-    name: "White Lounge Chair",
+    id: 702,
+    slug: "modern-floor-lamp",
+    name: "Modern Floor Lamp",
+    category: "Furniture",
+    subcategory: "Light",
+    price: 150.00,
+    images: ["https://plus.unsplash.com/premium_photo-1685133855288-dbb7cfb45802?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "A sleek and modern floor lamp that provides warm, ambient lighting.",
+    rating: 4.9,
+    reviewCount: 110,
+    tags: ["Beige"]
+  },
+  {
+    id: 705,
+    slug: "gray-accent-chair",
+    name: "Gray Accent Chair",
     category: "Furniture",
     subcategory: "Chairs",
-    price: 275.00,
-    images: [
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "A comfortable and stylish white lounge chair to complete your living space.",
+    price: 280.00,
+    images: ["https://plus.unsplash.com/premium_photo-1723834562788-8d88f18087ec?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"],
+    description: "A comfortable and stylish accent chair in a versatile gray fabric.",
     rating: 4.7,
-    tags: ["white", "fabric"]
+    reviewCount: 78,
+    tags: ["Gray"]
   },
 
-  // == Flowers Products ==
-  {
-    id: 8,
-    slug: "red-rose-bouquet",
-    name: "Red Rose Bouquet",
-    category: "Flowers",
-    subcategory: "Roses",
-    price: 55.00,
-    images: [
-      "https://images.unsplash.com/photo-1580422055931-b9b53278546b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "A classic bouquet of one dozen long-stemmed red roses.",
-    rating: 4.9,
-    tags: ["red", "bouquet"]
-  },
-  {
-    id: 10,
-    slug: "yellow-tulip-arrangement",
-    name: "Yellow Tulip Arrangement",
-    category: "Flowers",
-    subcategory: "Tulips",
-    price: 45.00,
-    images: [
-      "https://images.unsplash.com/photo-1520782222383-b93b708b3c5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-    ],
-    description: "A bright and cheerful arrangement of fresh yellow tulips.",
-    rating: 4.7,
-    tags: ["yellow", "arrangement"]
-  }
+  // ===================================
+  // ====== Jewelry Products ===========
+  // ===================================
+  //{
+   // id: 5,
+  //  slug: "silver-moon-necklace",
+  //  name: "Silver Moon Necklace",
+   // category: "Jewelry",
+   // subcategory: "Necklaces",
+//material: "Silver",
+  //  price: 120.00,
+   // images: ["https://images.unsplash.com/photo-1611652033959-8a3d4aa0e525?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"],
+//description: "A delicate and elegant sterling silver necklace.",
+   // rating: 4.9,
+   // reviewCount: 88,
+  //  tags: ["Elegant", "Minimalist"]
+  //}
 ];
